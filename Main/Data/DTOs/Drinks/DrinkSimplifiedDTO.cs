@@ -2,7 +2,7 @@
 
 namespace Drinks_Info.Data.DTOs.Drinks;
 
-internal class DrinkSimplifiedDTO
+public class DrinkSimplifiedDTO
 {
     [JsonPropertyName("strDrink")]
     public string Name { get; set; }

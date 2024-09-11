@@ -2,31 +2,31 @@
 
 namespace Drinks_Info.Data.DTOs.Drinks;
 
-internal class DrinkCompleteDTO
+public class DrinkCompleteDTO
 {
     [JsonPropertyName("idDrink")]
-    public string Id { get; set; }
+    public string? Id { get; set; }
 
     [JsonPropertyName("strDrink")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("strDrinkAlternate")]
-    public object DrinkAlternative { get; set; }
+    public string? DrinkAlternative { get; set; }
 
     [JsonPropertyName("strTags")]
-    public string Tags { get; set; }
+    public string? Tags { get; set; }
 
     [JsonPropertyName("strCategory")]
-    public string Category { get; set; }
+    public string? Category { get; set; }
 
     [JsonPropertyName("strGlass")]
-    public string Glass { get; set; }
+    public string? Glass { get; set; }
 
     [JsonPropertyName("strInstructions")]
-    public string Instructions { get; set; }
+    public string? Instructions { get; set; }
 
     [JsonPropertyName("strDrinkThumb")]
-    public string Thumb { get; set; }
+    public string? Thumb { get; set; }
 
     [JsonIgnore]
     public List<string>? Ingredients
@@ -98,5 +98,5 @@ internal class DrinkCompleteDTO
     public string? Ingredient15 { get; set; }
 
     [JsonPropertyName("dateModified")]
-    public string DateModified { get; set; }
+    public string? DateModified { get; set; }
 }

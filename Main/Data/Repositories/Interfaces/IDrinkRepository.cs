@@ -2,9 +2,9 @@
 
 namespace Drinks_Info.Data.Repositories.Interfaces;
 
-internal interface IDrinkRepository
+public interface IDrinkRepository
 {
-    public Task<List<DrinkSimplifiedDTO>> FilterByCategoryName(string categoryName);
+    Task<List<DrinkSimplifiedDTO>> FilterByCategoryName(string categoryName);
 
-    public Task<DrinkCompleteDTO?> Find(int id);
+    Task<DrinkCompleteDTO?> Find(int id);
 }
