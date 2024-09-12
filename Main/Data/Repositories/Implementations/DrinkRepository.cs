@@ -5,7 +5,7 @@ using System.Net.Http.Json;
 
 namespace Drinks_Info.Data.Repositories.Implementations;
 
-internal class DrinkRepository : IDrinkRepository
+public class DrinkRepository : IDrinkRepository
 {
     private readonly HttpClient _httpClient;
 
@@ -34,9 +34,12 @@ internal class DrinkRepository : IDrinkRepository
 
         if (response != null)
         {
-            if (response.Drinks.Count > 0)
+            if (response.Drinks != null)
             {
-                return response.Drinks[0];
+                if (response.Drinks.Count > 0)
+                {
+                    return response.Drinks[0];
+                }
             }
         }
 

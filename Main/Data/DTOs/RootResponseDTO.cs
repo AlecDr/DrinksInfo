@@ -2,8 +2,8 @@
 
 namespace Drinks_Info.Data.DTOs;
 
-internal class RootResponseDTO<T>
+public class RootResponseDTO<T>
 {
     [JsonPropertyName("drinks")]
-    public List<T> Drinks { get; set; }
+    public List<T>? Drinks { get; set; }
 }
