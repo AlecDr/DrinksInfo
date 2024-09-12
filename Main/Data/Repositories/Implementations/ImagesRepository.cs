@@ -2,7 +2,7 @@
 
 namespace Drinks_Info.Data.Repositories.Implementations;
 
-internal class ImagesRepository : IImagesRepository
+public class ImagesRepository : IImagesRepository
 {
     private readonly HttpClient _httpClient;
 
@@ -24,13 +24,30 @@ internal class ImagesRepository : IImagesRepository
 
         if (response != null)
         {
-            byte[] imageBytes = await response.Content.ReadAsByteArrayAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                byte[] imageBytes = await response.Content.ReadAsByteArrayAsync();
 
-            await File.WriteAllBytesAsync(savePath, imageBytes);
+                await File.WriteAllBytesAsync(savePath, imageBytes);
 
-            return savePath;
+                return savePath;
+            }
         }
 
         return null;
+    }
+
+    public bool? DeleteImageFromLocalStorage(int drinkId)
+    {
+        string savePath = Path.Combine(Directory.GetCurrentDirectory(), $"{drinkId}.jpg");
+
+        if (File.Exists(savePath))
+        {
+            File.Delete(savePath);
+
+            return true;
+        }
+
+        return false;
     }
 }
