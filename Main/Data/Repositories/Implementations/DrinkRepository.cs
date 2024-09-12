@@ -22,7 +22,10 @@ public class DrinkRepository : IDrinkRepository
         RootResponseDTO<DrinkSimplifiedDTO>? response = await _httpClient.GetFromJsonAsync<RootResponseDTO<DrinkSimplifiedDTO>>($"https://www.thecocktaildb.com/api/json/v1/1/filter.php?c={categoryName}");
         if (response != null)
         {
-            return response.Drinks;
+            if (response.Drinks != null)
+            {
+                return response.Drinks;
+            }
         }
 
         return [];
