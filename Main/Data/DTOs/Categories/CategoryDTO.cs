@@ -2,7 +2,7 @@
 
 namespace Drinks_Info.Data.DTOs.Categories;
 
-internal class CategoryDTO
+public class CategoryDTO
 {
     [JsonPropertyName("strCategory")]
     public string Name { get; set; }

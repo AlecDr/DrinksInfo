@@ -5,7 +5,7 @@ using System.Net.Http.Json;
 
 namespace Drinks_Info.Data.Repositories.Implementations;
 
-internal class CategoryRepository : ICategoryRepository
+public class CategoryRepository : ICategoryRepository
 {
     private readonly HttpClient _httpClient;
 
@@ -23,7 +23,10 @@ internal class CategoryRepository : ICategoryRepository
 
         if (response != null)
         {
-            return response.Drinks;
+            if (response.Drinks != null)
+            {
+                return response.Drinks;
+            }
         }
 
         return [];

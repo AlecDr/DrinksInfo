@@ -2,7 +2,7 @@
 
 namespace Drinks_Info.Data.Repositories.Interfaces;
 
-internal interface ICategoryRepository
+public interface ICategoryRepository
 {
     public Task<List<CategoryDTO>> All();
 }
