@@ -56,6 +56,22 @@ public class DrinkRepositoryTests
     }
 
     [Fact]
+    public async Task FindDrink_MustNotReturnDrink()
+    {
+        // Arrange
+        string drinkResponseJson = JsonSerializer.Serialize(new { });
+        StaticDrinksJsonHttpMessageHandler httpMessageHandler = new StaticDrinksJsonHttpMessageHandler(drinkResponseJson);
+        HttpClient httpClient = new HttpClient(httpMessageHandler);
+        DrinkRepository drinkRepository = new DrinkRepository(httpClient);
+
+        // Act
+        DrinkCompleteDTO? drink = await drinkRepository.Find(1);
+
+        // Assert
+        Assert.Null(drink);
+    }
+
+    [Fact]
     public async Task FilterByCategory_MustReturnDrinks()
     {
         // Arrange
