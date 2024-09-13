@@ -72,11 +72,38 @@ public class DrinksServiceTests
         Assert.Empty(drinks);
     }
 
-    //public async Task FindDrinkById_MustReturnDrink() { }
-    //public async Task FindDrinkById_MustNotReturnDrink() { }
+    [Fact]
+    public async Task FindDrinkById_MustReturnDrink()
+    {
+        // Arrange
+        CategoryRepository categoryRepository = new CategoryRepository(StaticDrinksJsonHttpMessageHandler.WithFilledCategoryList());
+        DrinkRepository drinkRepository = new DrinkRepository(StaticDrinksJsonHttpMessageHandler.WithExistingDrink());
+        ImagesRepository imagesRepository = new ImagesRepository(StaticDrinksJsonHttpMessageHandler.WithNonExistingImage());
+        DrinksService drinksService = new DrinksService(drinkRepository, categoryRepository, imagesRepository);
+
+        // Act
+        DrinkCompleteDTO? drink = await drinksService.FindDrinkById(1);
+
+        // Assert
+        Assert.NotNull(drink);
+    }
+
+    [Fact]
+    public async Task FindDrinkById_MustNotReturnDrink()
+    {
+        // Arrange
+        CategoryRepository categoryRepository = new CategoryRepository(StaticDrinksJsonHttpMessageHandler.WithFilledCategoryList());
+        DrinkRepository drinkRepository = new DrinkRepository(StaticDrinksJsonHttpMessageHandler.WithNonExistingDrink());
+        ImagesRepository imagesRepository = new ImagesRepository(StaticDrinksJsonHttpMessageHandler.WithNonExistingImage());
+        DrinksService drinksService = new DrinksService(drinkRepository, categoryRepository, imagesRepository);
+
+        // Act
+        DrinkCompleteDTO? drink = await drinksService.FindDrinkById(1);
+
+        // Assert
+        Assert.Null(drink);
+    }
 
     //public async Task GetImage_MustReturnImagePath() { }
     //public async Task GetImage_MustNotReturnImagePath() { }
-
-
 }
