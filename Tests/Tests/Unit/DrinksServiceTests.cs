@@ -23,7 +23,21 @@ public class DrinksServiceTests
         Assert.Empty(categories);
     }
 
-    //public async Task AllCategories_MustReturnNotEmptyList() { }
+    [Fact]
+    public async Task AllCategories_MustReturnNotEmptyList()
+    {
+        // Arrange
+        CategoryRepository categoryRepository = new CategoryRepository(StaticDrinksJsonHttpMessageHandler.WithFilledCategoryList());
+        DrinkRepository drinkRepository = new DrinkRepository(StaticDrinksJsonHttpMessageHandler.WithExistingDrink());
+        ImagesRepository imagesRepository = new ImagesRepository(StaticDrinksJsonHttpMessageHandler.WithNonExistingImage());
+        DrinksService drinksService = new DrinksService(drinkRepository, categoryRepository, imagesRepository);
+
+        // Act
+        List<CategoryDTO> categories = await drinksService.AllCategories();
+
+        // Assert
+        Assert.NotEmpty(categories);
+    }
 
     //public async Task AllDrinksByCategoryName_MustReturnDrinksByCategory() { }
     //public async Task AllDrinksByCategoryName_MustNotReturnDrinksByCategory() { }
