@@ -104,6 +104,40 @@ public class DrinksServiceTests
         Assert.Null(drink);
     }
 
-    //public async Task GetImage_MustReturnImagePath() { }
-    //public async Task GetImage_MustNotReturnImagePath() { }
+    [Fact]
+    public async Task GetImage_MustReturnImagePath()
+    {
+        // Arrange
+        CategoryRepository categoryRepository = new CategoryRepository(StaticDrinksJsonHttpMessageHandler.WithFilledCategoryList());
+        DrinkRepository drinkRepository = new DrinkRepository(StaticDrinksJsonHttpMessageHandler.WithNonExistingDrink());
+        ImagesRepository imagesRepository = new ImagesRepository(StaticDrinksJsonHttpMessageHandler.WithExistingImage());
+        DrinksService drinksService = new DrinksService(drinkRepository, categoryRepository, imagesRepository);
+
+        // Act
+        string? imagePath = await drinksService.GetImage("https://0.0.0.0/some-random-image.jpg", 1);
+        // delete created file
+        imagesRepository.DeleteImageFromLocalStorage(1);
+
+        // Assert
+        Assert.NotNull(imagePath);
+
+    }
+
+    [Fact]
+    public async Task GetImage_MustNotReturnImagePath()
+    {
+        // Arrange
+        CategoryRepository categoryRepository = new CategoryRepository(StaticDrinksJsonHttpMessageHandler.WithFilledCategoryList());
+        DrinkRepository drinkRepository = new DrinkRepository(StaticDrinksJsonHttpMessageHandler.WithNonExistingDrink());
+        ImagesRepository imagesRepository = new ImagesRepository(StaticDrinksJsonHttpMessageHandler.WithNonExistingImage());
+        DrinksService drinksService = new DrinksService(drinkRepository, categoryRepository, imagesRepository);
+        // delete old file
+        imagesRepository.DeleteImageFromLocalStorage(1);
+
+        // Act
+        string? imagePath = await drinksService.GetImage("https://0.0.0.0/some-random-image.jpg", 1);
+
+        // Assert
+        Assert.Null(imagePath);
+    }
 }
