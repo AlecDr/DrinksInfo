@@ -45,6 +45,22 @@ public class DrinksServiceTests
     {
         // Arrange
         CategoryRepository categoryRepository = new CategoryRepository(StaticDrinksJsonHttpMessageHandler.WithFilledCategoryList());
+        DrinkRepository drinkRepository = new DrinkRepository(StaticDrinksJsonHttpMessageHandler.WithFilledDrinksList());
+        ImagesRepository imagesRepository = new ImagesRepository(StaticDrinksJsonHttpMessageHandler.WithNonExistingImage());
+        DrinksService drinksService = new DrinksService(drinkRepository, categoryRepository, imagesRepository);
+
+        // Act
+        List<DrinkSimplifiedDTO> drinks = await drinksService.AllDrinksByCategoryName("test drink category");
+
+        // Assert
+        Assert.NotEmpty(drinks);
+    }
+
+    [Fact]
+    public async Task AllDrinksByCategoryName_MustNotReturnDrinksByCategory()
+    {
+        // Arrange
+        CategoryRepository categoryRepository = new CategoryRepository(StaticDrinksJsonHttpMessageHandler.WithFilledCategoryList());
         DrinkRepository drinkRepository = new DrinkRepository(StaticDrinksJsonHttpMessageHandler.WithEmptyDrinksList());
         ImagesRepository imagesRepository = new ImagesRepository(StaticDrinksJsonHttpMessageHandler.WithNonExistingImage());
         DrinksService drinksService = new DrinksService(drinkRepository, categoryRepository, imagesRepository);
@@ -55,8 +71,6 @@ public class DrinksServiceTests
         // Assert
         Assert.Empty(drinks);
     }
-
-    //public async Task AllDrinksByCategoryName_MustNotReturnDrinksByCategory() { }
 
     //public async Task FindDrinkById_MustReturnDrink() { }
     //public async Task FindDrinkById_MustNotReturnDrink() { }
