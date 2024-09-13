@@ -5,7 +5,7 @@ using Drinks_Info.Services.Interfaces;
 
 namespace Drinks_Info.Services.Implementations;
 
-internal class DrinksService : IDrinksService
+public class DrinksService : IDrinksService
 {
     private readonly IDrinkRepository _drinkRepository;
     private readonly ICategoryRepository _categoryRepository;
