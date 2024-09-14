@@ -37,10 +37,19 @@ internal class CategoriesScreen : IScreen
             List<CategoryDTO> categories = _drinksService.AllCategories().Result;
             Categories = new List<CategoryDTO>(categories);
 
-            _consoleHelper.ClearWindow();
+            if (categories.Count > 0)
+            {
+                _consoleHelper.ClearWindow();
 
-            string option = _consoleHelper.GetOption("Categories", GetMenuChoices());
-            RouteToOption(option.ElementAt(0));
+                string option = _consoleHelper.GetOption("Categories", GetMenuChoices());
+                RouteToOption(option.ElementAt(0));
+            }
+            else
+            {
+                _consoleHelper.ClearWindow();
+                _consoleHelper.PressAnyKeyToContinue("No categories found, this is not a normal behaviour, since we always have at least one category available, try again later!");
+                MainMenu();
+            }
 
         }
         catch (Exception ex)

@@ -277,7 +277,7 @@ Execute the test suite using the following command:
 - [x] **`Task 2`**: Implement Drink Selection functionality to allow users to choose a drink from the selected category.
 - [x] **`Task 3`**: Implement Drink Detail View that excludes empty/null properties and displays only relevant drink information.
 - [x] **`Task 4`**: Integrate external API for fetching drinks categories and drink details.
-- [ ] **`Task 5`**: Implement error handling for API calls and ensure user-friendly messages are displayed.
+- [x] **`Task 5`**: Implement error handling for API calls and ensure user-friendly messages are displayed.
 - [x] **`Task 6`**: Write unit tests for the service and repository layers, mocking the API for test scenarios.
 
 ---

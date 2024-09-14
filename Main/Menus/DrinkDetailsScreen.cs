@@ -38,22 +38,40 @@ internal class DrinkDetailsScreen : IScreen
             DrinkCompleteDTO? drink = _drinksService.FindDrinkById(_drinksInfoHelper.SelectedDrinkId!.Value).Result;
             Drink = drink;
 
-            _consoleHelper.ClearWindow();
+            if (drink != null)
+            {
+                _consoleHelper.ClearWindow();
 
-            ShowDrinkDetails();
+                ShowDrinkDetails();
 
-            _consoleHelper.PressAnyKeyToContinue();
-            _drinksInfoHelper.SelectedCategory = null;
-            _drinksInfoHelper.SelectedDrinkId = null;
-            _drinksInfoHelper.ChangeMenu(_serviceProvider.GetRequiredService<MainMenu>());
+                _consoleHelper.PressAnyKeyToContinue();
+                _drinksInfoHelper.SelectedCategory = null;
+                _drinksInfoHelper.SelectedDrinkId = null;
+                _drinksInfoHelper.ChangeMenu(_serviceProvider.GetRequiredService<MainMenu>());
+
+            }
+            else
+            {
+                _consoleHelper.ClearWindow();
+                _consoleHelper.PressAnyKeyToContinue("We could not find this drink, try again later!");
+                ResetSelectedDrinksAndGoToMenu();
+            }
+
         }
         catch (Exception ex)
         {
             _consoleHelper.ClearWindow();
             _consoleHelper.PressAnyKeyToContinue("Something went wrong in the application, try again later;");
-            MainMenu();
+            ResetSelectedDrinksAndGoToMenu();
 
         }
+    }
+
+    private void ResetSelectedDrinksAndGoToMenu()
+    {
+        _drinksInfoHelper.SelectedCategory = null;
+        _drinksInfoHelper.SelectedDrinkId = null;
+        _drinksInfoHelper.ChangeMenu(_serviceProvider.GetRequiredService<MainMenu>());
     }
 
     private void ShowDrinkDetails()

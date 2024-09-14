@@ -33,22 +33,29 @@ internal class DrinksScreen : IScreen
         _consoleHelper.ShowMessage("Fetching Drinks...");
         try
         {
-
-
             List<DrinkSimplifiedDTO> drinks = _drinksService.AllDrinksByCategoryName(_drinksInfoHelper.SelectedCategory!.Name).Result;
             Drinks = new List<DrinkSimplifiedDTO>(drinks);
 
-            _consoleHelper.ClearWindow();
+            if (drinks.Count > 0)
+            {
 
-            string option = _consoleHelper.GetOption("Drinks", GetMenuChoices());
-            RouteToOption(option.ElementAt(0));
+                _consoleHelper.ClearWindow();
+
+                string option = _consoleHelper.GetOption("Drinks", GetMenuChoices());
+                RouteToOption(option.ElementAt(0));
+            }
+            else
+            {
+                _consoleHelper.ClearWindow();
+                _consoleHelper.PressAnyKeyToContinue("We could not find any drink in this category, try other!");
+                CategoriesMenu();
+            }
         }
         catch (Exception ex)
         {
             _consoleHelper.ClearWindow();
-            _consoleHelper.PressAnyKeyToContinue("Something went wrong in the application, try again later;");
+            _consoleHelper.PressAnyKeyToContinue("Something went wrong in the application, try again later!");
             MainMenu();
-
         }
     }
 
@@ -85,6 +92,11 @@ internal class DrinksScreen : IScreen
     private void MainMenu()
     {
         _drinksInfoHelper.ChangeMenu(_serviceProvider.GetRequiredService<MainMenu>());
+    }
+
+    private void CategoriesMenu()
+    {
+        _drinksInfoHelper.ChangeMenu(_serviceProvider.GetRequiredService<CategoriesScreen>());
     }
 
     private void DrinkDetailsScreen(int drinkIndex)
