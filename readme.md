@@ -1,23 +1,13 @@
 ﻿<p align="center">
-  <img src="https://img.icons8.com/?size=512&id=55494&format=png" width="20%" alt="DRINKSINFO-logo">
+    <h1 align="center">DRINKS INFO 🍹</h1>
 </p>
-<p align="center">
-    <h1 align="center">DRINKSINFO</h1>
-</p>
-<p align="center">
-    <em><code>❯ REPLACE-ME</code></em>
-</p>
+
 <p align="center">
 	<img src="https://img.shields.io/github/license/AlecDr/DrinksInfo?style=flat&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
 	<img src="https://img.shields.io/github/last-commit/AlecDr/DrinksInfo?style=flat&logo=git&logoColor=white&color=0080ff" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/AlecDr/DrinksInfo?style=flat&color=0080ff" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/AlecDr/DrinksInfo?style=flat&color=0080ff" alt="repo-language-count">
 </p>
-<p align="center">
-		<em>Built with the tools and technologies:</em>
-</p>
-<p align="center">
-	</p>
 
 <br>
 
@@ -25,6 +15,7 @@
 
 - [📍 Overview](#-overview)
 - [👾 Features](#-features)
+- [👾 Design Patterns](#-design-patterns)
 - [📂 Repository Structure](#-repository-structure)
 - [🧩 Modules](#-modules)
 - [🚀 Getting Started](#-getting-started)
@@ -41,14 +32,41 @@
 
 ## 📍 Overview
 
-<code>❯ REPLACE-ME</code>
+This project is a solution for a restaurant that allows employees to view and select drinks from a menu provided by an external company's API. The system fetches categories of drinks, lets the user choose a specific drink, and displays detailed information.
 
 ---
 
 ## 👾 Features
 
-<code>❯ REPLACE-ME</code>
+- **Drinks Category Menu**:
+  The application will display a list of drink categories fetched from an external API. The user can navigate through the list to select a category.
 
+- **Drink Selection**:
+  After selecting a category, users can view a list of drinks available in that category. The drink list is pulled dynamically from the external API.
+
+- **Drink Detail View**:
+  When a drink is selected, a detailed view will be shown. It will present information such as drink name, ingredients, and price, ensuring that no empty or null properties are displayed.
+
+- **API Integration**:
+  The system connects to the external API to fetch drink categories and details. It uses asynchronous programming (async/await) for efficient communication and error handling.
+
+- **Error Handling**:
+  Clear, user-friendly error messages will be displayed in case of API failures, empty categories, or missing data. The system will gracefully handle such scenarios.
+
+- **Unit Testing**:
+  The service and repository layers are tested with unit tests. API calls will be mocked to simulate different responses and scenarios.
+
+
+---
+
+## 🎨 Design Patterns 
+
+This project leverages key architectural patterns to ensure maintainability and scalability:
+
+- **Helpers**: Used to simplify access for the most commonly used functionalities accross the application.
+- **DTOs (Data Transfer Objects)**: Used to encapsulate data and send it between different layers of the application.
+- **Repositories**: Abstracts and encapsulates all access to the data source, providing a clear separation between the business logic and database access code.
+- **Services**: Abstracts and encapsulates all business logic for the application.
 ---
 
 ## 📂 Repository Structure
@@ -214,7 +232,7 @@
 
 ### 🔖 Prerequisites
 
-**CSharp**: `version x.y.z`
+**CSharp**: `version 8.0`
 
 ### 📦 Installation
 
@@ -255,9 +273,12 @@ Execute the test suite using the following command:
 
 ## 📌 Project Roadmap
 
-- [X] **`Task 1`**: <strike>Implement feature one.</strike>
-- [ ] **`Task 2`**: Implement feature two.
-- [ ] **`Task 3`**: Implement feature three.
+- [x] **`Task 1`**: Implement Drinks Category Menu to display all categories retrieved from the external API.
+- [x] **`Task 2`**: Implement Drink Selection functionality to allow users to choose a drink from the selected category.
+- [x] **`Task 3`**: Implement Drink Detail View that excludes empty/null properties and displays only relevant drink information.
+- [x] **`Task 4`**: Integrate external API for fetching drinks categories and drink details.
+- [ ] **`Task 5`**: Implement error handling for API calls and ensure user-friendly messages are displayed.
+- [x] **`Task 6`**: Write unit tests for the service and repository layers, mocking the API for test scenarios.
 
 ---
 
@@ -308,12 +329,12 @@ Contributions are welcome! Here are several ways you can contribute:
 
 ## 🎗 License
 
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+This project is protected under the [MIT](https://choosealicense.com/licenses/mit/) License. For more details, refer to the [LICENSE](https://github.com/AlecDr/FlashCards/blob/master/LICENSE.txt) file.
 
 ---
 
 ## 🙌 Acknowledgments
 
-- List any resources, contributors, inspiration, etc. here.
+- Idea taken from [C# Academy](https://www.thecsharpacademy.com/), nice location to learn C#.
 
 ---
