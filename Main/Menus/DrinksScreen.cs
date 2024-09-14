@@ -31,14 +31,25 @@ internal class DrinksScreen : IScreen
     {
         _consoleHelper.ClearWindow();
         _consoleHelper.ShowMessage("Fetching Drinks...");
+        try
+        {
 
-        List<DrinkSimplifiedDTO> drinks = _drinksService.AllDrinksByCategoryName(_drinksInfoHelper.SelectedCategory!.Name).Result;
-        Drinks = new List<DrinkSimplifiedDTO>(drinks);
 
-        _consoleHelper.ClearWindow();
+            List<DrinkSimplifiedDTO> drinks = _drinksService.AllDrinksByCategoryName(_drinksInfoHelper.SelectedCategory!.Name).Result;
+            Drinks = new List<DrinkSimplifiedDTO>(drinks);
 
-        string option = _consoleHelper.GetOption("Drinks", GetMenuChoices());
-        RouteToOption(option.ElementAt(0));
+            _consoleHelper.ClearWindow();
+
+            string option = _consoleHelper.GetOption("Drinks", GetMenuChoices());
+            RouteToOption(option.ElementAt(0));
+        }
+        catch (Exception ex)
+        {
+            _consoleHelper.ClearWindow();
+            _consoleHelper.PressAnyKeyToContinue("Something went wrong in the application, try again later;");
+            MainMenu();
+
+        }
     }
 
     public void RouteToOption(char option)

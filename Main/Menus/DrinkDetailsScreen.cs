@@ -33,18 +33,27 @@ internal class DrinkDetailsScreen : IScreen
         _consoleHelper.ClearWindow();
         _consoleHelper.ShowMessage("Fetching Drink...");
 
-        DrinkCompleteDTO? drink = _drinksService.FindDrinkById(_drinksInfoHelper.SelectedDrinkId!.Value).Result;
-        Drink = drink;
+        try
+        {
+            DrinkCompleteDTO? drink = _drinksService.FindDrinkById(_drinksInfoHelper.SelectedDrinkId!.Value).Result;
+            Drink = drink;
 
-        _consoleHelper.ClearWindow();
+            _consoleHelper.ClearWindow();
 
-        ShowDrinkDetails();
+            ShowDrinkDetails();
 
-        _consoleHelper.PressAnyKeyToContinue();
-        _drinksInfoHelper.SelectedCategory = null;
-        _drinksInfoHelper.SelectedDrinkId = null;
-        _drinksInfoHelper.ChangeMenu(_serviceProvider.GetRequiredService<MainMenu>());
+            _consoleHelper.PressAnyKeyToContinue();
+            _drinksInfoHelper.SelectedCategory = null;
+            _drinksInfoHelper.SelectedDrinkId = null;
+            _drinksInfoHelper.ChangeMenu(_serviceProvider.GetRequiredService<MainMenu>());
+        }
+        catch (Exception ex)
+        {
+            _consoleHelper.ClearWindow();
+            _consoleHelper.PressAnyKeyToContinue("Something went wrong in the application, try again later;");
+            MainMenu();
 
+        }
     }
 
     private void ShowDrinkDetails()

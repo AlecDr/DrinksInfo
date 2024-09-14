@@ -32,13 +32,24 @@ internal class CategoriesScreen : IScreen
         _consoleHelper.ClearWindow();
         _consoleHelper.ShowMessage("Fetching categories...");
 
-        List<CategoryDTO> categories = _drinksService.AllCategories().Result;
-        Categories = new List<CategoryDTO>(categories);
+        try
+        {
+            List<CategoryDTO> categories = _drinksService.AllCategories().Result;
+            Categories = new List<CategoryDTO>(categories);
 
-        _consoleHelper.ClearWindow();
+            _consoleHelper.ClearWindow();
 
-        string option = _consoleHelper.GetOption("Categories", GetMenuChoices());
-        RouteToOption(option.ElementAt(0));
+            string option = _consoleHelper.GetOption("Categories", GetMenuChoices());
+            RouteToOption(option.ElementAt(0));
+
+        }
+        catch (Exception ex)
+        {
+            _consoleHelper.ClearWindow();
+            _consoleHelper.PressAnyKeyToContinue("Something went wrong in the application, try again later;");
+            MainMenu();
+
+        }
     }
 
     public void RouteToOption(char option)
