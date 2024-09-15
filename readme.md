@@ -15,7 +15,7 @@
 
 - [📍 Overview](#-overview)
 - [👾 Features](#-features)
-- [👾 Design Patterns](#-design-patterns)
+- [🎨 Design Patterns](#-design-patterns)
 - [📂 Repository Structure](#-repository-structure)
 - [🧩 Modules](#-modules)
 - [🚀 Getting Started](#-getting-started)
